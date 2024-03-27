@@ -41,7 +41,7 @@ const AdminChatBot = ({ id }) => {
      </Button>
     </Dialog.Trigger>
     <Dialog.Content style={{ maxWidth: 450 }}>
-     <Dialog.Title>Eagle Express AdminChatBot</Dialog.Title>
+     <Dialog.Title>PMS AdminChatBot</Dialog.Title>
      <Dialog.Description size="2" mb="4">
       <div className="grid  font-semibold gap-2 max-h-80 overflow-y-auto ">
        {fetchChat.map((msg) => <div key={msg.id} className={msg.sender === 'user' ? `bg-indigo-200/50 py-2 px-4 rounded-2xl tracking-normal` : `bg-yellow-200/50 text-right py-2 px-4 rounded-2xl tracking-normal`}>

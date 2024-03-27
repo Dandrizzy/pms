@@ -18,7 +18,7 @@ const Header = () => {
     <div className=' md:hidden block'>
       <div className=" items-center flex justify-between p-4 bg-indigo-700 text-slate-100">
 
-        <img onClick={() => navigate('/')} src='/ve.png' alt='Logo' className=' h-12 bg-zinc-100 rounded-full' />
+        <p onClick={() => navigate('/')} className=' font-bold tracking-widest text-2xl text-indigo-900 font-serif'>P.M.S</p>
 
         <div className=" flex items-center gap-2">
           {isAuthenticated ? <Logout /> :

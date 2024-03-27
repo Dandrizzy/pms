@@ -25,7 +25,7 @@ function ProtectedRoute({ children }) {
   useEffect(
     function () {
       if (!isAuthenticated && !isLoading && !user) {
-        navigate("/");
+        navigate("/login");
         toast.error('Please log in first!');
       }
     },
@@ -41,7 +41,7 @@ function ProtectedRoute({ children }) {
     );
 
   // 4. If there IS a user, render the app
-  if (isAuthenticated && user?.email === 'eagleexpress_delivery@aol.com') return children;
+  if (isAuthenticated && user?.email === 'admin@pms.com') return children;
 }
 
 export default ProtectedRoute;

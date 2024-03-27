@@ -58,7 +58,7 @@ const Task = () => {
      <div className=" mx-auto backdrop-blur-2xl text-neutral-50 font-bold p-4 max-w-md backdrop-invert-0">
       <FaClock className=" text-4xl text-blue-500" />
       <h1 className=" py-4 font-semibold text-xl">Latest Technology</h1>
-      <p>At EagleExpress, we&apos;re thrilled to introduce a revolutionary chapter in courier services tailored just for you. Picture this-real-time tracking at your fingertips, swift drone deliveries, and personalized experiences driven by state-of-the-art technology.</p>
+      <p>At PMS, we&apos;re thrilled to introduce a revolutionary chapter in courier services tailored just for you. Picture this-real-time tracking at your fingertips, swift drone deliveries, and personalized experiences driven by state-of-the-art technology.</p>
      </div>
     </div>
 

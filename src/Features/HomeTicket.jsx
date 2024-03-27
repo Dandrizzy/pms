@@ -6,6 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { formatCurrency } from "../Hooks/helpers";
 import { Button } from "@radix-ui/themes";
 import { FaMapLocationDot } from "react-icons/fa6";
+import Error404 from "../ui/404";
 
 
 const HomeTicket = () => {
@@ -20,7 +21,7 @@ const HomeTicket = () => {
 
   if (isFetching) return <Spinner />;
 
-  if (data?.data === undefined) return <p className=" p-4">Please check your internet. 📶</p>;
+  if (data?.data === undefined) return <Error404 />;
 
   const { name, rAddress, rCountry, rEmail, rName, rPhone, sAddress, sCountry, sEmail, sPhone, weight, description, deliveryDate, receiveDate, amount, status } = data.data;
 

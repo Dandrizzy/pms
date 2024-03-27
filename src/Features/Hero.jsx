@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { Dialog } from '@headlessui/react';
 import { Cross1Icon, HamburgerMenuIcon } from '@radix-ui/react-icons';
-import { Form } from 'react-router-dom';
+import { Form, useNavigate } from 'react-router-dom';
 import { Button } from '@radix-ui/themes';
 import { BiMapPin } from 'react-icons/bi';
+import { useForm } from 'react-hook-form';
+import { useUser } from './authentication/useUser';
 
 const navigation = [
   { name: 'Product' },
@@ -14,6 +16,13 @@ const navigation = [
 
 export default function Hero() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { register, handleSubmit } = useForm();
+  const navigate = useNavigate();
+  const { isAuthenticated } = useUser();
+
+  const submit = data => {
+    navigate(`/${data.trackingCode}`);
+  };
 
   return (
     <div className="bg-white">
@@ -67,6 +76,12 @@ export default function Hero() {
                       {item.name}
                     </div>
                   ))}
+                  <div
+                    onClick={() => navigate('/dashboard')}
+                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  >
+                    {isAuthenticated && 'Dashboard'}
+                  </div>
                 </div>
 
               </div>
@@ -110,15 +125,17 @@ export default function Hero() {
                   We’re a global company that values diversity, ambition and a collaborative can-do attitude. And that offers you all the support you need to make your career as rewarding as possible.
                 </p>
                 <div className="mt-10 flex items-center justify-center gap-x-6">
-                  <Form>
+                  <Form onSubmit={handleSubmit(submit)}>
                     <div className="relative mt-2 rounded-md shadow-sm">
                       <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                         <span className="text-gray-500 sm:text-sm"><BiMapPin /></span>
                       </div>
                       <input
-                        type="text"
-                        name="price"
-                        id="price"
+                        required
+                        {...register('trackingCode', {
+                          required: 'This field is required'
+                        })}
+                        id="trackingCode"
                         className="block w-[30rem] px-10 rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         placeholder="Tracking code"
                       />
@@ -127,6 +144,7 @@ export default function Hero() {
                           Track
                         </label>
                         <Button
+                          type='submit'
                           className="h-full border-0 outline-none bg-transparent py-0 pl-2 pr-7 text-gray-500 focus:ring-1 focus:ring-inset focus:ring-indigo-600 sm:text-sm"
                         >
                           Track

@@ -13,7 +13,7 @@ const Footer = () => {
        &copy; {new Date().getFullYear()}
       </strong>
       <span>
-       <strong>EagleExpress</strong>
+       <strong>PMS</strong>
       </span>
      </div>
      <div className="">
@@ -32,7 +32,7 @@ const Footer = () => {
     <div className="">
      <strong>Company</strong>
      <ul className=' pt-2 grid gap-2'>
-      <li>Eagle Express</li>
+      <li>PMS</li>
       <li>Courier</li>
       <li>Logistics</li>
      </ul>
@@ -42,7 +42,7 @@ const Footer = () => {
      <strong>Connect with us</strong>
      <ul className=' pt-2 flex  gap-6'>
       <li><a href="tel:+13649993541"><FaPhone /></a></li>
-      <li><a href="mailto:eagleexpress_delivery@aol.com"><MdMail /></a></li>
+      <li><a href="mailto:PMS_delivery@aol.com"><MdMail /></a></li>
      </ul>
      <img src="/veh.png" alt="Lgo" className=" h-20 mx-auto mt-8 bg-neutral-100 rounded-md p-1" />
     </div>

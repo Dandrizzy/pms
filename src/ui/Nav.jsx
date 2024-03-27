@@ -18,8 +18,8 @@ const Nav = () => {
 
   return (
     <div className=" hidden items-center md:grid grid-cols-2 p-4 bg-indigo-700 text-slate-100">
-      <img onClick={() => navigate('/')} src='/ve.png' alt='Logo' className=' h-12 bg-zinc-100 rounded-full' />
 
+      <p onClick={() => navigate('/')} className=' font-bold tracking-widest text-2xl text-indigo-900 font-serif'>P.M.S</p>
       <ul className=" lg:text-lg [&>*]:cursor-pointer flex justify-between">
         <li className=' hover:bg-neutral-200/20 transition-all duration-300 rounded-full px-2 py-0 flex items-center justify-center gap-1' onClick={() => navigate('/')}><MdHome />Home</li>
 
