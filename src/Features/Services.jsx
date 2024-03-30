@@ -30,7 +30,7 @@ const callouts = [
  {
   name: 'Packaging',
   description: 'We make sure that your goods are well packaged before being shipped out to the stated destination.Our packaging method is the best and you need not worry about package spoilage.',
-  imageSrc: '/01.JPG',
+  imageSrc: '/01.jpg',
   imageAlt: 'Collection of four insulated travel bottles on wooden shelf.',
 
  },

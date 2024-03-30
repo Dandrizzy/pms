@@ -113,7 +113,7 @@ export default function Hero() {
             <div className="mx-auto max-w-2xl pt-32 sm:pt-48 lg:pt-56">
               <div className="mb-8 flex justify-center">
                 <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-                  Announcing our next round of funding.{' '}
+                  Swift delivery to any location.{' '}
 
                 </div>
               </div>
