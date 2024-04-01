@@ -41,7 +41,7 @@ function ProtectedRoute({ children }) {
     );
 
   // 4. If there IS a user, render the app
-  if (isAuthenticated && user?.email === 'admin@pms.com') return children;
+  if (isAuthenticated) return children;
 }
 
 export default ProtectedRoute;
