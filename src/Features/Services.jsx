@@ -30,7 +30,7 @@ const callouts = [
  {
   name: 'Packaging',
   description: 'We make sure that your goods are well packaged before being shipped out to the stated destination.Our packaging method is the best and you need not worry about package spoilage.',
-  imageSrc: '/01.jpg',
+  imageSrc: '/1.jpg',
   imageAlt: 'Collection of four insulated travel bottles on wooden shelf.',
 
  },
@@ -63,7 +63,7 @@ export default function Services() {
         </div>
         <h3 className="mt-6 text-sm text-gray-500">
          <div>
-          <span className="absolute inset-0" />
+          <span className="absolute inset-0 uppercase" />
           {callout.name}
          </div>
         </h3>
