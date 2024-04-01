@@ -41,7 +41,10 @@ function ProtectedRoute({ children }) {
     );
 
   // 4. If there IS a user, render the app
-  if (isAuthenticated) return children;
+  if (isAuthenticated) {
+    navigate('/dashboard');
+    return children;
+  }
 }
 
 export default ProtectedRoute;
