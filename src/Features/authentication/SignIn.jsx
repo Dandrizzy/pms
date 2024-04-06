@@ -4,7 +4,7 @@ import { useLogin } from "./useLogin";
 import SpinnerMini from "../../ui/SpinnerMini";
 
 const SignIn = () => {
- const { login, isLoading } = useLogin({ route: '/' });
+ const { login, isLoading } = useLogin({ route: '/dashboard' });
 
  const { register, handleSubmit, reset } = useForm();
  function onSubmit(data) {
