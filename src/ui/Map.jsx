@@ -24,7 +24,7 @@ function Map() {
   const { ticketId } = useParams();
   const { getSpecific } = useGetSpecificApi({ key: 'position', ticketId });
 
-  const { data = [], isFetching } = useGetSpecific({ key: ['position', ticketId], fn: getSpecific });
+  const { data = [], isFetching } = useGetSpecific({ key: ['pmsPosition', ticketId], fn: getSpecific });
 
   const [mapPosition, setMapPosition] = useState([40, 0]);
 

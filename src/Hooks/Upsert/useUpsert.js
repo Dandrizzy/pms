@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 export const useUpsert = () => {
  const {mutate: upsert, isPending} = useMutation({
    mutationFn: upsertApi,
-   mutationKey: [ 'position' ],
+   mutationKey: [ 'pmsPosition' ],
    onSuccess: ()=> toast.success( "Position saved!" ),
  })
 

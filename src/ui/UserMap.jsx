@@ -7,23 +7,26 @@ import {
 import "leaflet/dist/leaflet.css";
 
 import styles from "./Map.module.css";
-import { useGetSpecificApi } from "../Hooks/GetSpecific/useGetSpecificApi";
-import { useGetSpecific } from "../Hooks/GetSpecific/useGetSpecific";
 import Spinner from "./Spinner";
 import { useParams } from "react-router-dom";
+import { useGetApi } from "../Hooks/Get/useGetApi";
+import { useGet } from "../Hooks/Get/useGet";
 
 function UserMap() {
   const { alphaCode: ticketId } = useParams();
-  const { getSpecific } = useGetSpecificApi({ key: 'position', ticketId });
+  const { fetch: fn } = useGetApi({ key: 'pmsPosition' });
 
-  const { data = [], isFetching } = useGetSpecific({ key: ['position', ticketId], fn: getSpecific });
+  const { isFetching, fetch: data } = useGet({ key: ['pmsPosition', ticketId], fn });
+
 
   if (isFetching) return <Spinner />;
+  const location = data.find(item => item.ticketId === ticketId);
+  console.log(location);
 
   return (
     <div className={styles.mapContainer + ' relative'}>
       <MapContainer
-        center={[data?.data?.lat, data?.data?.lng]}
+        center={[location?.lat, location?.lng]}
         zoom={4}
         doubleClickZoom={false}
         scrollWheelZoom={false}
@@ -35,7 +38,7 @@ function UserMap() {
         />
 
         <Marker
-          position={[data?.data?.lat, data?.data?.lng]}
+          position={[location?.lat, location?.lng]}
         >
           <Popup className=" bg-indigo-200">
             <span>Current location</span>
