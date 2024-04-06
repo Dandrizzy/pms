@@ -2,7 +2,7 @@ import supabase from './supabase';
 
 export async function updateTicket({ id, obj }) {
   const { data, error } = await supabase
-    .from('ticket')
+    .from('pmsTicket')
     .update(obj)
     .eq('id', id)
     .select()

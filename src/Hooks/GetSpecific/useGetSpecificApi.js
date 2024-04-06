@@ -6,7 +6,7 @@ export const useGetSpecificApi = ({ key, ticketId }) => {
     const { data, error } = await supabase
       .from(key)
       .select('*')
-      .eq('ticketId', ticketId)
+      .eq('trackingId', ticketId)
       .single();
 
     if (error) {

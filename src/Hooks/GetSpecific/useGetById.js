@@ -6,7 +6,7 @@ export const useGetById = ({ key, id }) => {
     const { data, error } = await supabase
       .from(key)
       .select('*')
-      .eq('id', id)
+      .eq('userId', id)
       .single();
 
     if (error) {

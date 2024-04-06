@@ -6,16 +6,17 @@ import { useState } from 'react';
 import { useCreateApi } from '../Hooks/Create/useCreateApi';
 import { useCreate } from '../Hooks/Create/useCreate';
 import Spinner from '../ui/Spinner';
+import { formatDate } from '../Hooks/helpers';
 const CreateForm = () => {
 
  const navigate = useNavigate();
 
- const { create: createFn } = useCreateApi({ key: 'ticket' });
- const { create, isCreating } = useCreate({ key: ['ticket'], fn: createFn });
+ const { create: createFn } = useCreateApi({ key: 'pmsTicket' });
+ const { create, isCreating } = useCreate({ key: ['pmsTicket'], fn: createFn });
 
 
- const [receiveDate, setReceiveDate] = useState('');
- const [deliveryDate, setDeliveryDate] = useState('');
+ const [statusDate, setStatusDate] = useState('2024-04-06T02:56');
+ const [arrivalDate, setArrivalDate] = useState('2024-04-06T02:56');
 
  const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
@@ -24,8 +25,11 @@ const CreateForm = () => {
  const disable = errors.name || errors.sCountry || errors.sAddress || errors.sPhone || errors.sEmail || errors.rName || errors.rCountry || errors.rAddress || errors.rPhone || errors.rEmail || errors.description || errors.weight;
 
 
+ console.log(formatDate(arrivalDate));
+ console.log(arrivalDate);
+
  const onSubmit = data => {
-  create({ ...data, receiveDate, deliveryDate, author: 'pms' }, {
+  create({ ...data, statusDate, arrivalDate, author: 'pms' }, {
    onSuccess: () => {
     reset();
     navigate(`/dashboard`);
@@ -39,91 +43,149 @@ const CreateForm = () => {
 
    <Form onSubmit={handleSubmit(onSubmit)}   >
 
-    <div className=' grid sm:grid-cols-3 sm:gap-x-4 gap-x-8 gap-y-16'>
+    <div className=' grid md:grid-cols-3 sm:gap-x-4 gap-x-8 gap-y-8'>
+     <div className=" md:col-span-3 text-xl font-bold">Tracking ID</div>
 
      <div className=" grid gap-4 ">
-      <label htmlFor="sName">Sender&apos;s name:</label>
-      <input type="text" id='sName' {...register('name', { required: true })} className=' border-b border-neutral-900 duration-500 transition-all focus:border-b-2 outline-none py-2 focus:border-blue-500' placeholder="Sender's name" />
+      <label htmlFor="trackingId">Tracking ID</label>
+      <input type="text" id='trackingId' {...register('trackingId', { required: true })} className=' border-b border-neutral-900 duration-500 transition-all focus:border-b-2 outline-none py-2 focus:border-blue-500' placeholder="Enter tracking ID" />
+     </div>
+
+     <div className=" md:col-span-3 text-xl font-bold">Sender&apos;s Details</div>
+
+     <div className=" grid gap-4 ">
+      <label htmlFor="fullName">Full Name</label>
+      <input type="text" id='fullName' {...register('fullName', { required: true })} className=' border-b border-neutral-900 duration-500 transition-all focus:border-b-2 outline-none py-2 focus:border-blue-500' placeholder="name" />
      </div>
 
      <div className=" grid gap-4 ">
-      <label htmlFor="sCountry">Sender&apos;s country:</label>
-      <input {...register('sCountry', { required: true })} type="text" id='sCountry' className=' border-b border-neutral-900 duration-500 transition-all focus:border-b-2 outline-none py-2 focus:border-blue-500' placeholder="Sender's country" />
+      <label htmlFor="country">Country</label>
+      <input {...register('country', { required: true })} type="text" id='country' className=' border-b border-neutral-900 duration-500 transition-all focus:border-b-2 outline-none py-2 focus:border-blue-500' placeholder="country" />
      </div>
 
      <div className=" grid gap-4 ">
-      <label htmlFor="sAddress">Sender&apos;s address:</label>
-      <input {...register('sAddress', { required: true })} type="text" id='sAddress' className=' border-b border-neutral-900 duration-500 transition-all focus:border-b-2 outline-none py-2 focus:border-blue-500' placeholder="Sender's address" />
+      <label htmlFor="state">State</label>
+      <input {...register('state', { required: true })} type="text" id='state' className=' border-b border-neutral-900 duration-500 transition-all focus:border-b-2 outline-none py-2 focus:border-blue-500' placeholder="country" />
      </div>
 
      <div className=" grid gap-4 ">
-      <label htmlFor="sPhone">Sender&apos;s phone:</label>
-      <input {...register('sPhone', { required: true })} type="text" id='sPhone' className=' border-b border-neutral-900 duration-500 transition-all focus:border-b-2 outline-none py-2 focus:border-blue-500' placeholder="Sender's phone" />
+      <label htmlFor="address">Address</label>
+      <input {...register('address', { required: true })} type="text" id='address' className=' border-b border-neutral-900 duration-500 transition-all focus:border-b-2 outline-none py-2 focus:border-blue-500' placeholder="address" />
      </div>
 
      <div className=" grid gap-4 ">
-      <label htmlFor="sEmail">Sender&apos;s email:</label>
-      <input {...register('sEmail', { required: true })} type="email" id='sEmail' className=' border-b border-neutral-900 duration-500 transition-all focus:border-b-2 outline-none py-2 focus:border-blue-500' placeholder="Sender's email" />
+      <label htmlFor="number">Phone Number</label>
+      <input {...register('number', { required: true })} type="text" id='number' className=' border-b border-neutral-900 duration-500 transition-all focus:border-b-2 outline-none py-2 focus:border-blue-500' placeholder="phone" />
      </div>
 
      <div className=" grid gap-4 ">
-      <label htmlFor="rName">Recipient name:</label>
-      <input {...register('rName', { required: true })} type="text" id='rName' className=' border-b border-neutral-900 duration-500 transition-all focus:border-b-2 outline-none py-2 focus:border-blue-500' placeholder="Recipient name" />
+      <label htmlFor="email">Email</label>
+      <input {...register('email', { required: true })} type="email" id='email' className=' border-b border-neutral-900 duration-500 transition-all focus:border-b-2 outline-none py-2 focus:border-blue-500' placeholder="email" />
+     </div>
+
+     <div className=" md:col-span-3 text-xl font-bold">Receiver&apos;s Details</div>
+
+     <div className=" grid gap-4 ">
+      <label htmlFor="rFullName">Full Name</label>
+      <input type="text" id='rFullName' {...register('rFullName', { required: true })} className=' border-b border-neutral-900 duration-500 transition-all focus:border-b-2 outline-none py-2 focus:border-blue-500' placeholder="name" />
      </div>
 
      <div className=" grid gap-4 ">
-      <label htmlFor="rCountry">Recipient country:</label>
-      <input {...register('rCountry', { required: true })} type="text" id='rCountry' className=' border-b border-neutral-900 duration-500 transition-all focus:border-b-2 outline-none py-2 focus:border-blue-500' placeholder="Recipient country" />
+      <label htmlFor="rCountry">Country</label>
+      <input {...register('rCountry', { required: true })} type="text" id='rCountry' className=' border-b border-neutral-900 duration-500 transition-all focus:border-b-2 outline-none py-2 focus:border-blue-500' placeholder="country" />
      </div>
 
      <div className=" grid gap-4 ">
-      <label htmlFor="rAddress">Recipient address:</label>
-      <input {...register('rAddress', { required: true })} type="text" id='rAddress' className=' border-b border-neutral-900 duration-500 transition-all focus:border-b-2 outline-none py-2 focus:border-blue-500' placeholder="Recipient address" />
+      <label htmlFor="rState">State</label>
+      <input {...register('rState', { required: true })} type="text" id='rState' className=' border-b border-neutral-900 duration-500 transition-all focus:border-b-2 outline-none py-2 focus:border-blue-500' placeholder="country" />
      </div>
 
      <div className=" grid gap-4 ">
-      <label htmlFor="rPhone">Recipient phone:</label>
-      <input {...register('rPhone', { required: true })} type="text" id='rPhone' className=' border-b border-neutral-900 duration-500 transition-all focus:border-b-2 outline-none py-2 focus:border-blue-500' placeholder="Recipient phone" />
+      <label htmlFor="rAddress">Address</label>
+      <input {...register('rAddress', { required: true })} type="text" id='rAddress' className=' border-b border-neutral-900 duration-500 transition-all focus:border-b-2 outline-none py-2 focus:border-blue-500' placeholder="address" />
      </div>
 
      <div className=" grid gap-4 ">
-      <label htmlFor="rEmail">Recipient email:</label>
-      <input {...register('rEmail', { required: true })} type="email" id='rEmail' className=' border-b border-neutral-900 duration-500 transition-all focus:border-b-2 outline-none py-2 focus:border-blue-500' placeholder="Recipient email" />
+      <label htmlFor="rNumber">Phone Number</label>
+      <input {...register('rNumber', { required: true })} type="text" id='rNumber' className=' border-b border-neutral-900 duration-500 transition-all focus:border-b-2 outline-none py-2 focus:border-blue-500' placeholder="phone number" />
      </div>
 
      <div className=" grid gap-4 ">
-      <label htmlFor="description">Description:</label>
-      <input {...register('description', { required: true })} type="text" id='description' className=' border-b border-neutral-900 duration-500 transition-all focus:border-b-2 outline-none py-2 focus:border-blue-500' placeholder="Description" />
+      <label htmlFor="rEmail">Email</label>
+      <input {...register('rEmail', { required: true })} type="email" id='rEmail' className=' border-b border-neutral-900 duration-500 transition-all focus:border-b-2 outline-none py-2 focus:border-blue-500' placeholder="Email" />
+     </div>
+
+     <div className=" md:col-span-3 text-xl font-bold">Shipment Details</div>
+
+     <div className=" grid gap-4 ">
+      <label htmlFor="packageName">Package Name</label>
+      <input {...register('packageName', { required: true })} type="text" id='packageName' className=' border-b border-neutral-900 duration-500 transition-all focus:border-b-2 outline-none py-2 focus:border-blue-500' placeholder="Package name" />
      </div>
 
      <div className=" grid gap-4 ">
-      <label htmlFor="weight">Weight:</label>
-      <input {...register('weight', { required: true })} type="number" id='weight' className=' border-b border-neutral-900 duration-500 transition-all focus:border-b-2 outline-none py-2 focus:border-blue-500' placeholder="Weight in (kg)" />
+      <label htmlFor="units">Units</label>
+      <input {...register('units', { required: true })} type="number" id='units' className=' border-b border-neutral-900 duration-500 transition-all focus:border-b-2 outline-none py-2 focus:border-blue-500' placeholder="units" />
      </div>
 
      <div className=" grid gap-4 ">
-      <label htmlFor="amount">Amount:</label>
-      <input {...register('amount', { required: true })} type="number" id='weight' className=' border-b border-neutral-900 duration-500 transition-all focus:border-b-2 outline-none py-2 focus:border-blue-500' placeholder="Amount in ($)" />
+      <label htmlFor="quantity">Quantity</label>
+      <input {...register('quantity', { required: true })} type="number" id='weight' className=' border-b border-neutral-900 duration-500 transition-all focus:border-b-2 outline-none py-2 focus:border-blue-500' placeholder="quantity" />
      </div>
 
      <div className=" grid gap-4 ">
-      <label htmlFor="deliveryDate">Status:</label>
-      <input {...register('status', { required: true })} type="text" id='status' className=' border-b border-neutral-900 duration-500 transition-all focus:border-b-2 outline-none py-2 focus:border-blue-500' placeholder="Status" />
+      <label htmlFor="price">Price</label>
+      <input {...register('price', { required: true })} type="number" id='weight' className=' border-b border-neutral-900 duration-500 transition-all focus:border-b-2 outline-none py-2 focus:border-blue-500' placeholder="price" />
+     </div>
+
+     <div className=" grid gap-4 ">
+      <label htmlFor="destination">Destination</label>
+      <input {...register('destination', { required: true })} type="text" id='destination' className=' border-b border-neutral-900 duration-500 transition-all focus:border-b-2 outline-none py-2 focus:border-blue-500' placeholder="Destination" />
      </div>
 
      <div className="grid gap-4">
-      <label htmlFor="date">Set start date:</label>
-      <input className="focus:border-blue-500 border-neutral-900 duration-500 transition-all focus:border-b-2 outline-none border-b p-2" type="datetime-local" value={receiveDate
+      <label htmlFor="arrivalDate">Arrival Date & Time</label>
+      <input className="focus:border-blue-500 border-neutral-900 duration-500 transition-all focus:border-b-2 outline-none border-b p-2" type="datetime-local" value={arrivalDate
        // .toISOString().slice(0, -8)
-      } onChange={e => setReceiveDate(new Date(e.target.value).toISOString().slice(0, -8))} />
+      } onChange={e => setArrivalDate(new Date(e.target.value).toISOString().slice(0, -8))} />
      </div>
 
-     <div className="grid gap-4">
-      <label htmlFor="date">Set end date:</label>
-      <input className="focus:border-blue-500 border-neutral-900 duration-500 transition-all focus:border-b-2 outline-none border-b p-2" type="datetime-local" value={deliveryDate
-       // .toISOString().slice(0, -8)
-      } onChange={e => setDeliveryDate(new Date(e.target.value).toISOString().slice(0, -8))} />
+     <div className=" grid gap-4 ">
+      <label htmlFor="cFullName">Courier Full Name</label>
+      <input {...register('cFullName', { required: true })} type="text" id='cFullName' className=' border-b border-neutral-900 duration-500 transition-all focus:border-b-2 outline-none py-2 focus:border-blue-500' placeholder="Courier Full Name" />
      </div>
+
+     <div className=" grid gap-4 ">
+      <label htmlFor="cEmail">Courier Email</label>
+      <input {...register('cEmail', { required: true })} type="text" id='cEmail' className=' border-b border-neutral-900 duration-500 transition-all focus:border-b-2 outline-none py-2 focus:border-blue-500' placeholder="Email" />
+     </div>
+
+
+     <div className=" grid gap-4 ">
+      <label htmlFor="cNumber">Courier Phone Number</label>
+      <input {...register('cNumber', { required: true })} type="text" id='cNumber' className=' border-b border-neutral-900 duration-500 transition-all focus:border-b-2 outline-none py-2 focus:border-blue-500' placeholder="Courier Phone Number" />
+     </div>
+
+     <div className=" md:col-span-3 text-xl font-bold">Shipment Current Status</div>
+
+     <div className="grid gap-4">
+      <label htmlFor="statusDate">Status Date</label>
+      <input className="focus:border-blue-500 border-neutral-900 duration-500 transition-all focus:border-b-2 outline-none border-b p-2" type="datetime-local" value={statusDate
+       // .toISOString().slice(0, -8)
+      } onChange={e => setStatusDate(new Date(e.target.value).toISOString().slice(0, -8))} />
+     </div>
+
+     <div className=" grid gap-4 ">
+      <label htmlFor="sLocation">Status Location</label>
+      <input {...register('sLocation', { required: true })} type="text" id='sLocation' className=' border-b border-neutral-900 duration-500 transition-all focus:border-b-2 outline-none py-2 focus:border-blue-500' placeholder="Location" />
+     </div>
+
+     <div className=" grid gap-4 ">
+      <label htmlFor="currentStatus">Current Status</label>
+      <input {...register('currentStatus', { required: true })} type="text" id='currentStatus' className=' border-b border-neutral-900 duration-500 transition-all focus:border-b-2 outline-none py-2 focus:border-blue-500' placeholder="Current Status" />
+     </div>
+
+
+
 
     </div>
 

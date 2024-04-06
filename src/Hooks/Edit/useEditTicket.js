@@ -13,7 +13,7 @@ export function useEditTicket() {
     mutationFn: updateTicket,
     onSuccess: () => {
       toast.success('Ticket successfully edited');
-      queryClient.invalidateQueries({ queryKey: ['tickets', ticketId] });
+      queryClient.invalidateQueries({ queryKey: ['pmsTicket', ticketId] });
     },
     onError: (err) => toast.error(err.message),
   });

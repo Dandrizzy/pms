@@ -1,16 +1,17 @@
 import { FaTimes } from "react-icons/fa";
 
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useGetApi } from "../Hooks/Get/useGetApi";
 import { useGet } from "../Hooks/Get/useGet";
 import Spinner from "../ui/Spinner";
-import { Button, Flex } from "@radix-ui/themes";
+import { Table } from "@radix-ui/themes";
 
 const Admin = () => {
  const navigate = useNavigate();
 
- const { fetch } = useGetApi({ key: 'ticket' });
- const { isFetching, fetch: fetchData = [] } = useGet({ key: ['ticket'], fn: fetch });
+ const { fetch } = useGetApi({ key: 'pmsTicket' });
+ const { isFetching, fetch: fetchData = [] } = useGet({ key: ['pmsTicket'], fn: fetch });
+
 
  const filteredData = fetchData.filter(item => item.author === 'pms');
 
@@ -21,52 +22,28 @@ const Admin = () => {
 
  return (
   <div className=" sm:p-4 text-neutral-900">
-   <div className=" bg-slate-500 text-neutral-100 p-2 grid grid-cols-2 md:grid-cols-5
-    gap-2">
-    <div className="md:block hidden">Sender&apos;s name</div>
-    <div className="md:block hidden">Country</div>
-    {/* <div className="">Address</div>
-    <div className="">Phone</div>
-    <div className="">Email</div> */}
-    <div className="">Recipient name</div>
-    <div className="md:block hidden">Country</div>
-    {/* <div className="">Address</div>
-    <div className="">Phone</div>
-    <div className="">Email</div> */}
-    <div className="">Send mail</div>
-    {/* <div className="">Weight(KG)</div> */}
-   </div>
 
-   {filteredData.map(item => {
-    return (
-     <div key={item.id} className=" p-2 gap-2  grid grid-cols-2 md:grid-cols-5 [&>*]:overflow-x-clip even:bg-neutral-200 uppercase"  >
-      <div className="hidden md:block"> {item.name}</div>
-      <div className="hidden md:block">{item.sCountry}</div>
-      {/* <div className="">{item.sAddress}</div>
-      <div className=" ">{item.sPhone}</div>
-      <div className="">{item.sEmail}</div> */}
-      <div className="">{item.rName}</div>
-      <div className="md:block hidden ">{item.rCountry}</div>
-      {/* <div className="">{item.rAddress}</div>
-      <div className="">{item.rPhone}</div>
-      <div className="">{item.rEmail}</div> */}
-      <Flex gap="3">
-       <Button onClick={() => navigate(`/ticket/${item.ticketId}`)} color="indigo" variant="soft">
-        Show
-       </Button>
-      </Flex>
-      {/* <div className=" flex gap-2">
-       <button onClick={() => navigate(`/mail/${item.ticketId}`)} className=" bg-indigo-500 text-neutral-100 px-2 rounded-md hover:bg-indigo-400" >Mail</button>
-       <button onClick={() => navigate(`/ticket/${item.ticketId}`)} className=" border-2 border-blue-600 text-blue-900 px-2 rounded-md hover:bg-indigo-200" >Show</button>
-      </div> */}
-      {/* <div className="">{item.weight}</div> */}
-     </div>
-    );
-   })}
+   <Table.Root>
+    <Table.Header>
+     <Table.Row>
+      <Table.ColumnHeaderCell>Full name</Table.ColumnHeaderCell>
+      <Table.ColumnHeaderCell>Email</Table.ColumnHeaderCell>
+      <Table.ColumnHeaderCell>Tracking Id</Table.ColumnHeaderCell>
+     </Table.Row>
+    </Table.Header>
 
-   <Link to='/form' className=" hover:animate-spin text-5xl text-blue-600 fixed bottom-8 right-8">
-    <FaTimes className=" lg:text-6xl rotate-45 cursor-pointer" />
-   </Link>
+    <Table.Body>
+     {filteredData.map(item => <Table.Row className=" cursor-pointer" key={item.id} onClick={() => navigate(`/ticket/${item.trackingId}`)}>
+      <Table.RowHeaderCell>{item.rFullName}</Table.RowHeaderCell>
+      <Table.Cell>{item.rEmail}</Table.Cell>
+      <Table.Cell>{item.trackingId}</Table.Cell>
+     </Table.Row>)}
+    </Table.Body>
+   </Table.Root>
+
+   <button onClick={() => navigate('/form')} className=" h-16 w-16 text-blue-600 fixed bottom-8 right-8 rounded-full">
+    <FaTimes className=" text-5xl rotate-45 cursor-pointer" />
+   </button>
 
   </div>
  );
