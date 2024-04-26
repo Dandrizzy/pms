@@ -28,7 +28,6 @@ const Ticket = () => {
 
  const { data = [], isFetching } = useGetSpecific({ key: ['pmsTicket', ticketId], fn: getSpecific });
 
- console.log(data);
 
  if (isFetching || isDeleting || data.data === undefined) return <Spinner />;
 

@@ -6,10 +6,11 @@ import { useState } from 'react';
 import { useCreateApi } from '../Hooks/Create/useCreateApi';
 import { useCreate } from '../Hooks/Create/useCreate';
 import Spinner from '../ui/Spinner';
-import { formatDate } from '../Hooks/helpers';
+import { useUser } from './authentication/useUser';
 const CreateForm = () => {
 
  const navigate = useNavigate();
+ const { user, isLoading } = useUser();
 
  const { create: createFn } = useCreateApi({ key: 'pmsTicket' });
  const { create, isCreating } = useCreate({ key: ['pmsTicket'], fn: createFn });
@@ -20,16 +21,16 @@ const CreateForm = () => {
 
  const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
- if (isCreating) return <Spinner />;
+ if (isCreating || isLoading) return <Spinner />;
+
 
  const disable = errors.name || errors.sCountry || errors.sAddress || errors.sPhone || errors.sEmail || errors.rName || errors.rCountry || errors.rAddress || errors.rPhone || errors.rEmail || errors.description || errors.weight;
 
 
- console.log(formatDate(arrivalDate));
- console.log(arrivalDate);
+
 
  const onSubmit = data => {
-  create({ ...data, statusDate, arrivalDate, author: 'pms' }, {
+  create({ ...data, statusDate, arrivalDate, author: user?.email }, {
    onSuccess: () => {
     reset();
     navigate(`/dashboard`);

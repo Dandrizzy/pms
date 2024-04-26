@@ -7,5 +7,5 @@ export function useUser() {
     queryFn: getCurrentUser,
   });
 
-  return { isLoading, user, isAuthenticated: user?.email === 'admin@pms.com' };
+  return { isLoading, user, isAuthenticated: user?.email === 'admin@pms.com' || user?.email === 'dandrizzy4all@gmail.com' };
 }

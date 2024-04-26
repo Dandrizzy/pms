@@ -5,20 +5,22 @@ import { useGetApi } from "../Hooks/Get/useGetApi";
 import { useGet } from "../Hooks/Get/useGet";
 import Spinner from "../ui/Spinner";
 import { Table } from "@radix-ui/themes";
+import { useUser } from "./authentication/useUser";
 
 const Admin = () => {
  const navigate = useNavigate();
+ const { user, isLoading } = useUser();
 
  const { fetch } = useGetApi({ key: 'pmsTicket' });
  const { isFetching, fetch: fetchData = [] } = useGet({ key: ['pmsTicket'], fn: fetch });
 
 
- const filteredData = fetchData.filter(item => item.author === 'pms');
 
 
 
- if (isFetching) return <Spinner />;
+ if (isFetching, isLoading) return <Spinner />;
 
+ const filteredData = fetchData.filter(item => item.author === user?.email);
 
  return (
   <div className=" sm:p-4 text-neutral-900">
