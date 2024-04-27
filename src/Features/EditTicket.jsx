@@ -24,12 +24,12 @@ const EditTicket = () => {
  const { fetch: fn } = useGetApi({ key: 'pmsTicket' });
  const { isFetching, fetch: data } = useGet({ key: ['pmsTicket'], fn });
 
- const ticket = data?.find(item => item.id = formId);
+ const ticket = data?.find(item => item.id == formId);
  const [statusDate, setStatusDate] = useState(ticket?.statusDate);
  const [arrivalDate, setArrivalDate] = useState(ticket?.arrivalDate);
 
  const { register, handleSubmit, reset } = useForm();
-
+ console.log(data);
  if (isEditing || isFetching) return <Spinner />;
  const { fullName, email, country, address, state, number, rCountry, rEmail, rFullName, rNumber, rAddress, rState, packageName, units, quantity, price, destination, id, trackingId, cEmail, cFullName, cNumber, sLocation, currentStatus } = ticket;
 
