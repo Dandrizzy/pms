@@ -100,7 +100,7 @@ const Ticket = () => {
      deleteItem(id, { onSuccess: () => navigate('/dashboard') });
     }} > <MdDelete className=' text-2xl' /> Delete</Button>
 
-    <Button size='3' color="crimson" radius="full" disabled={isDeleting} onClick={() => navigate(`/ticket/adminMap/${ticketId}`)
+    <Button size='3' color="crimson" radius="full" disabled={isDeleting} onClick={() => navigate(`/ticket/adminMap/${id}`)
     } > <FaMap className=' text-2xl' /> View map</Button>
 
     <Button onClick={() => navigate('/dashboard')} size='3' radius="full" color="gray" disabled={isDeleting} > <FaArrowLeftLong className=' text-2xl' />Back</Button>
