@@ -24,7 +24,7 @@ const EditTicket = () => {
  const { fetch: fn } = useGetApi({ key: 'pmsTicket' });
  const { isFetching, fetch: data } = useGet({ key: ['pmsTicket'], fn });
 
- const ticket = data?.find(item => item.trackingId = formId);
+ const ticket = data?.find(item => item.id = formId);
  const [statusDate, setStatusDate] = useState(ticket?.statusDate);
  const [arrivalDate, setArrivalDate] = useState(ticket?.arrivalDate);
 
