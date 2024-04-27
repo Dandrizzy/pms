@@ -92,7 +92,7 @@ const Ticket = () => {
 
    <div className=" py-10 flex justify-center items-center flex-wrap gap-3 sm:gap-8">
 
-    <Button size='3' radius="full" onClick={() => navigate(`/form/${id}`)} disabled={isDeleting} >
+    <Button size='3' radius="full" onClick={() => navigate(`/form/${ticketId}`)} disabled={isDeleting} >
      <FaEdit className=' text-2xl' />Edit
     </Button>
 
